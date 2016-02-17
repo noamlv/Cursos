@@ -1,0 +1,46 @@
+#ANOVA 
+
+library(foreign)
+PROYECTO<- read.spss("IOPGENERO.sav",use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+attach(PROYECTO)
+
+library(Hmisc)
+
+#Normalidad
+
+shapiro.test(EDAD)$p.value
+
+library(nortest)
+lillie.test(EDAD)$p.value
+
+
+#Test de Levene
+
+install.packages("lawstat")
+library(lawstat)
+
+describe(EDAD)
+describe(P3A)
+summary(EDAD)
+
+levene.test(EDAD, P3A, location=c("median", "mean", "trim.mean"), trim.alpha=0.25,bootstrap = "false", num.bootstrap=1000, kruskal.test=FALSE,correction.method=c("none","correction.factor","zero.removal","zero.correction"))
+
+install.packages("multcomp")
+library(multcomp)
+
+table(P3A)
+aggregate(EDAD, by = list(P3A), FUN = mean)
+aggregate(EDAD, by = list(P3A), FUN = sd)
+fit <- aov(EDAD ~ P3A) #primero la variable escalar y luego la nominal politómica
+summary(fit)
+library(gplots)
+plotmeans(EDAD ~ P3A, xlab = "P3A", ylab = "EDAD",main = "Mean Plot\nwith 95% CI")
+
+
+
+#Post Hoc: Tukey HSD
+
+TukeyHSD(fit)
+par(las = 2)
+par(mar = c(5, 8, 4, 2))
+plot(TukeyHSD(fit))
