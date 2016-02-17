@@ -1,0 +1,92 @@
+#Ejemplo introductorio para regresión************************************ 
+
+ind = c(0,10,20,30,40)
+dep = c(4,22,44,60,82)
+
+#El regresión linal se describirá así:  dep = bo + b1×ind + e 
+#La sintaxis básica en el R: lm(Y ~ modelo)
+
+lm(dep~ind)# Fórmula de la regresión lineal
+lmr <-lm(dep~ind) # Le ponemos un nombre para hacerle un resumen
+summary(lmr)#Resumiendo la fórmula
+coef(lmr)#Los coeficientes: el intecepto y la pendiente de "ind"
+resid(lmr)# Residuos (Los residuos deben estar aleatoria y normalmente distribuidos).
+fitted(lmr)# Valores esperados
+?lm
+plot(lmr)# Cuatro cuadros: 
+#1)Los residuos y los esperados. Los residuos deben estar distribuidos aleatoriamente.
+#2)Gráfico Q-Q. Los residuos deben seguir la línea.
+#3)La raíz cuadrada de los residuos estandarizados y los valores esperados. No debe haber una forma.
+#4)Para ver los valores distantes (menores que 1) y Leverage (menores que 0.2).
+
+plot(ind,dep)
+
+
+#PARTE I (OPERACIONES BASICAS)
+library (foreign)#cargando comando de importacion
+ejemplo1 <- read.spss("Intro Reg Lin.sav",use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)#cargando un atchivo de spss
+
+
+library(Hmisc)
+names(ejemplo1)
+attach(ejemplo1)
+
+#MODELANDO
+modelo1<- lm(coste ~ supf) #REGRESIÓN LINEAL con una sola independiente
+summary(modelo1)
+plot(modelo1)
+
+modelo1b<- lm(coste ~ supf + a_exp) #Regresión con dos independientes
+summary(modelo1b)
+
+
+#analizando MULTICOLINEALIDAD
+
+install.packages("perturb")
+library(perturb)
+colimodelo1<-colldiag(modelo1b)#Para ver el índice de condición
+print(colimodelo1,fuzz=.3)
+print(colimodelo1,fuzz=NULL)
+
+install.packages("car")
+library(car)
+vif(modelo1b)
+sqrt(vif(modelo1b))# Mayor de 4 encontramos multicolinalidad
+
+
+#analizando NORMALIDAD DE LOS RESIDUOS
+res<-residuals(modelo1)
+install.packages("nortest")
+library(nortest) #libreria para ver normalidad.
+sf.test(res)#Probando normalidad
+
+
+#INDEPENDENCIA DE ERRORES O NO AUTOCORRELACION
+install.packages("lmtest")
+library(lmtest)
+dwtest(modelo1)#El resultado debe estar entre 1.5 y 2.5
+
+
+#analizando si se acepta linealidad del modelo1 
+install.packages("gvlma")
+library(gvlma)
+gvmodelo1 <- gvlma(modelo1) 
+summary(gvmodelo1)
+plot(gvmodelo1)
+
+
+#analizando valores extremos
+
+plot(modelo1)
+ 
+
+library(MASS)
+cook<-cooks.distance(modelo1b)
+r<-stdres(modelo1b)
+rabs<-abs(r)
+yf<-fitted(modelo1b)
+a<-cbind(yf, cook,r,rabs)
+a[cook>4/387,]  #ver los que tengan mayor distancia de cook
+aordres<-a[order(-rabs),]#ordenando por residuo
+aordres[1:10,] #diez primeros
+
