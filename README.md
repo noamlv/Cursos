@@ -48,7 +48,9 @@ c.
 
 Profesores
 Arturo Abigail Calderón García - Departamento de Ciencias - Sección Matemáticas
+
 Cinthya Yanira Díaz Montalvo - Facultad de Letras y Ciencias Humanas - Sección Psicología
+
 Noam Dante Valentín López Villanes – Departamento de Ciencias Sociales – Sección Ciencia Política y Gobierno
 
 
