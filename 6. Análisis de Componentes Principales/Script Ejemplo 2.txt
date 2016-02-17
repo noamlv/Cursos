@@ -1,0 +1,150 @@
+#Si la data esta en SPSS (.sav)
+
+library(foreign)  #necesario para que funcione read.spss
+ejemplo<- read.spss("Juicio_Ho.sav",use.value.labels=TRUE, max.value.labels=Inf, to.data.frame=TRUE)
+
+names(ejemplo)
+
+
+install.packages("Hmisc")
+library(Hmisc)
+describe(ejemplo)
+names(ejemplo)
+
+label(ejemplo$sex)<-"Sexo del jurado" 
+label(ejemplo$ed)<-"Edad" 
+label(ejemplo$edu)<-"Nivel educativo del jurado"
+label(ejemplo$ing)<-"Ingresos del jurado"
+label(ejemplo$a_provo)<- "a-Esposo la provocó"
+label(ejemplo$b_proteg)<- "b-Ella se estaba protegiendo"
+label(ejemplo$c_mental)<-"c-Ella ya tenia problema mental"
+label(ejemplo$a_causa)<-"a-Esposo causó su muerte"
+label(ejemplo$b_salva)<-"b-Ella queria salvar su vida" 
+label(ejemplo$c_locura)<-"c-Ella tuvo instante de locura"
+label(ejemplo$a_conflicti)<-"a-Esposo era tipo conflictivo"
+label(ejemplo$b_defend)<-"b-Ella tenía que defenderse"
+label(ejemplo$c_sufre)<-"c-Ella sufría mucho"
+label(ejemplo$culp)<-"Culpabilidad atribuida"
+label(ejemplo$vere)<-"Veredicto del jurado"
+label(ejemplo$sent)<-"Sentencia en años"
+label(ejemplo$op)<-"Opinión pública"
+
+describe(ejemplo)
+
+frecuencia_e<-table(ejemplo$edu)
+barplot(frecuencia_e)
+
+frecuencia_s<-table(ejemplo$sex)
+barplot(frecuencia_s)
+
+pie(frecuencia_e)
+pie(frecuencia_s)
+
+hist(ejemplo$ed)
+hist(ejemplo$ing)
+
+
+#PCA (reduce data)
+
+    #Usando el paquete base "stats"
+    #Usa el comando princomp. Arroja resultados sin rotar.
+
+    fit <- princomp(~a_provo + b_proteg +  c_mental + a_causa + b_salva + c_locura +
+                a_conflicti +	b_defend + c_sufre, data=ejemplo, cor=TRUE)
+
+    summary(fit)
+    loadings(fit)
+    fit$scores
+    plot(fit,type="lines")
+    biplot(fit)
+
+    #Usando el paquete "psych"
+    #Primero creamos subconjunto!
+    
+    attach(ejemplo) #para no usar el símbolo "$"
+    data<-data.frame(a_provo,b_proteg,c_mental,a_causa,b_salva,c_locura,
+                     a_conflicti,b_defend,c_sufre)
+
+    install.packages("psych")
+    library(psych)
+    install.packages("GPArotation")
+    pca<- principal(data, nfactors=3, scores=TRUE, rotate="varimax");pca
+    print(pca$loadings,cutoff=.33, sort=TRUE)
+    print(pca$communality)
+    print(pca$weights)
+    print(pca$scores)
+    p<-data.frame(pca$scores) #le damos formato de data
+    names(p)<-c("proteccion", "locura","provocacion");p #nombrando variables
+
+    datanueva<-cbind(ejemplo,p) #juntando variables creadas con antiguas
+    save(datanueva, file="datanueva.rda") #guardamos en un formato del R.
+    write.csv(datanueva, file="datanueva.csv") #guardamos en un archivo CSV.
+
+#CAPTCA (reduce data)
+
+    #install.packages("FactorMiner")
+    #library(FactoMineR)
+    #result <- PCA(data)
+    
+    #Se usará el paquete "Psych" pero generaremos la matriz de covarianzas
+    #usando la correlacion policorica.
+
+    #REPASANDO CORRELACIONES...
+    #pearson (cont-cont); policorica (ord-ord); punto biserial(dico-cont)
+    #poliserial (cont-ord); tetracorica (dico-dico); policorica(ord-dico)
+
+    install.packages("polycor")
+    library(polycor)
+    str(data)
+    data$a_provo<-ordered(data$a_provo)
+    data$a_causa<-ordered(data$a_causa)
+    data$a_conflicti<-ordered(data$a_conflicti)
+    data$b_proteg<-ordered(data$b_proteg)
+    data$b_salva<-ordered(data$b_salva)
+    data$b_defend<-ordered(data$b_defend)
+    data$c_mental<-ordered(data$c_mental)
+    data$c_locura<-ordered(data$c_locura)
+    data$c_sufre<-ordered(data$c_sufre)
+    
+    cor<-hetcor(data) #calcula varios tipos de correlación (no importa el tipo de escala)
+    r<-cor$correlations #guarda solo las correlaciones
+
+    CATPCA<-principal(r,nfactors=3,n.obs=397,rotate="varimax")
+    print(CATPCA$loadings,cutoff=.33, sort=TRUE)
+
+
+#ANALISIS FACTORIAL EXPLORATORIO (busca teoría subyacente)
+
+    #Usando el paquete base "stats"
+    #El comando "factanal" utiliza el método de máxima verosimilitud
+
+    fac<-factanal(~a_provo + b_proteg +  c_mental + a_causa + b_salva + c_locura +
+                   a_conflicti +	b_defend + c_sufre, factors=3, data=ejemplo, 
+                  na.action=na.exclude,scores="Bartlett")
+
+    fac
+    varimax(loadings(fac), normalize = FALSE)
+    promax(loadings(fac))
+    predic<-fac$scores;summary(predic)
+
+   
+#ALFA DE CRONBACH (análiza la confiabilidad o consistencia interna)
+
+    
+    install.packages("multilevel")# paquete que contiene la función cronbach
+    library(multilevel)          
+
+    data<-data.frame(a_provo,b_proteg,c_mental,a_causa,b_salva,c_locura,
+                     a_conflicti,b_defend,c_sufre)
+    cronbach(data)
+
+    a<-data.frame(a_provo,a_causa,a_conflicti)
+        cronbach(a)
+    b<-data.frame(b_proteg,b_salva,b_defend)
+        cronbach(b)
+    c<-data.frame(c_mental,c_locura,c_sufre)
+        cronbach(c)
+
+
+
+
