@@ -1,0 +1,11 @@
+library(foreign)
+
+data2 <- read.spss("UE.sav", to.data.frame=TRUE, use.value.labels = TRUE)
+
+modelo<-glm(GDPDeflator ~ Governmentbonds + ConsumerPrices + TotalReservesMinusGold, family = gaussian, data = data2)  #creamos el objeto modelo, para lo cual planteamos la fórmula de la ecuación de la regresión lineal
+
+summary(modelo) #pedimos un resumen
+
+modelo2<-lm(GDPDeflator ~ Governmentbonds + ConsumerPrices + TotalReservesMinusGold, data2)
+
+summary(modelo2)
