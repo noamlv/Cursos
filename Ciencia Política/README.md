@@ -1,6 +1,3 @@
-Estadística 2.0
-
-La estadística es una disciplina indispensable en los procesos de investigación de las Ciencias Sociales y Ciencias Humanas. Su uso se orienta a incorporar rigurosidad en el proceso de generación de resultados. Por tanto aprender la variedad de técnicas estadísticas permite a los investigadores con las bases de los temas que dispongan. En la actualidad existe abundante literatura de consulta que satisface parcialmente los requerimientos de los estudiantes de pregrado tanto en versión en físico que se puede consultar desde las bibliotecas en PUCP o en forma de cursos libres o posts en varios sitios web. Sin embargo, muchas veces es difícil encontrar material acorde a las disciplinas de estudio para aquellos que provienen de la Ciencia Política, la Economía, la Sociología y la Psicología.
 
 Índice
 
