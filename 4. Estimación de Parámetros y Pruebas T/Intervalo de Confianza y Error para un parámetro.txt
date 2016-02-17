@@ -1,0 +1,39 @@
+install.packages ("foreign") 
+library ("foreign")
+data2<-read.spss("IOP-GENERO.sav", to.data.frame=TRUE, use.value.labels = TRUE)
+attach (data2) 
+P34
+install.packages("Hmisc")   ##paquete necesario para utilizar el comando describe ()
+library("Hmisc")
+describe(P34)
+
+p34r<-na.omit(P34)
+
+categoria<- ifelse (p34r=="Principalmente mi cÃ³nyuge /pareja", 1, 0)
+
+prop.table(table(categoria)) 
+
+p<- mean(cat)	 
+p  
+#Esta es la proporción de personas que respondieron esta opción		    
+
+media <-mean(na.omit(p34r))	
+n <- length(categoria)
+# Tamaño de la muestra
+
+error.est.p<- sqrt((p*(1-p))/n)
+# Calculamos	el error estándar. Recuerden la Fórmula: 	
+# pq = la posibilidad de éxito por la posibilidad de fracaso
+# q = 1 – p 
+# p = f1 / n
+
+error.p<-1.96*error.est.p	
+#Establecemos la puntuación Z (1.96) para indicar un nivel de confianza de 95%
+
+lim.inf.p<-p-error.p
+# Límite inferior del intervalo
+
+lim.sup.p<-p+error.p
+# Límite superior del intervalo
+
+

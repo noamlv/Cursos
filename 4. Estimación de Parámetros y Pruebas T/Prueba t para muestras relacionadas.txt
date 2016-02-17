@@ -1,0 +1,13 @@
+describe(RESEMAVAL)
+
+describe(SECVALWGT)
+
+install.packages("Hmisc") #Pedimos el paquete para pedir pruebas de normalidad.
+
+library(nortest) 
+
+lillie.test(RESEMAVAL)$p.value #Pedimos la normalidad de las variables 
+
+lillie.test(SECVALWGT)$p.value
+
+t.test(RESEMAVAL, SECVALWGT, alternative='two.sided', conf.level=.95, paired=TRUE)
