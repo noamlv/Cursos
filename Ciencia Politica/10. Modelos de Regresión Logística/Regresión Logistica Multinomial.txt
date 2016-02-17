@@ -1,9 +1,0 @@
-install.packages(“VGAM”) #instalando el paquete
-
-library(“VGAM”) #llamando a la librería 
-
-data <- read.csv("datavotguzman.csv", sep=";", header=TRUE) #cargando la data
-
-modelo <- glm (Educa ~ Ingre+ Edad , family ="multinomial", data=data)  #creando el objeto modelo para nuestra variable multinomial
-
-summary(modelo)
