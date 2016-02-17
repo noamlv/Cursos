@@ -42,8 +42,11 @@ Por tanto la innovación en los cursos de Estadística al usar Github radica pri
 6. Creación de material. Los materiales desarrollados por los alumnos se podrán consultar en luego de que el curso haya acabado dado que se almacenarán en el repositorio. Este material puede servir de apoyo y guía para los semestres posteriores, así como material de referencia para los alumnos que se encuentren en Facultad y deseen revisar material que les puede servir para sus investigaciones.
 
 Cursos
+
 a.  EST203 - Estadística II
+
 b.  POL304  - Estadística para el análisis político 2
+
 c.  
 
 Profesores
