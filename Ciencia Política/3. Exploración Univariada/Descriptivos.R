@@ -18,7 +18,6 @@ ggplot(Data, aes(x=V132A)) + geom_histogram(aes(y=..density..),binwidth=1.5, col
 
 
 
-
 #medidas de dispersion 
 
 install.packages(“psych”) #para pedir estadísticos descriptivos de dispersión 
