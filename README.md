@@ -1,4 +1,4 @@
-Estadística 2.0: 
+Estadística 2.0: noam
 la enseñanza de técnicas estadísticas para las ciencias sociales y la psicología a través de Github
 
 Este es un proyecto que ganó el II Fondo Concursable para la Innovación en la Docencia Universitaria de la Pontificia Universdidad Católica del Peru
