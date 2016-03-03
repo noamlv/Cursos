@@ -54,6 +54,6 @@ Arturo Abigail Calderón García - Departamento de Ciencias - Sección Matemáti
 
 Cinthya Yanira Díaz Montalvo - Facultad de Letras y Ciencias Humanas - Sección Psicología
 
-Noam Dante Valentín López Villanes – Departamento de Ciencias Sociales – Sección Ciencia Política y Gobierno
+ Dante Valentín López Villanes – Departamento de Ciencias Sociales – Sección Ciencia Política y Gobierno
 
 
