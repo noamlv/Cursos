@@ -1,0 +1,1 @@
+En este apartado encontrará una descripción del análisis de regresión logística. Además, encontrará una base de datos que servirá para realizar el ejercicio que se propone en la guía.
