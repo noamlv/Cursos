@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción del análisis de regresión lineal múltiple. Además, al final del apartado encontrará un ejercicio práctico resuelto con su respectiva base de datos. 
