@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción de los contrastes para comparar dos proporciones. Además, al final del apartado encontrará un ejercicio práctico resuelto con su respectiva bases de datos. 

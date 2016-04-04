@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción de los contrastes de análisis de varianza para dos factores. Además, al final del apartado encontrará un ejercicio práctico resuelto con su respectiva base de datos. 

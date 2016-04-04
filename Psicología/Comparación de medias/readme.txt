@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción de los contrastes para comparar dos medias relacionadas e independientes, tanto para muestras paramétricas como no paramétricas. Además, al final del apartado encontrará ejercicios prácticos resueltos con sus respectivas bases de datos. 

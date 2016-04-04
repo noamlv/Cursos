@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción de los diversos contrastes para comparar k muestras relacionadas e independientes. Además, al final del apartado encontrará ejercicios prácticos resueltos con sus respectivas bases de datos. 
