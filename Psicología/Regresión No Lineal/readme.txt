@@ -1,0 +1,1 @@
+En este apartado encontrará una breve descripción del análisis de regresión no lineal. En sus dos formas más comunes la de forma cuadrática y cúbica. Además, encontrará un ejercicio para cada uno de estos casos.
