@@ -1,0 +1,4 @@
+Resultado del modelo de regresión lineal:
+
+x= 0,8 + 12 (Governmentbonds) + 0,5(ConsumerPrices) - 0,1
+ (TotalReservesMinusGold)
