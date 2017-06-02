@@ -6,6 +6,4 @@ modelo<-glm(GDPDeflator ~ Governmentbonds + ConsumerPrices + TotalReservesMinusG
 
 summary(modelo) #pedimos un resumen
 
-modelo2<-lm(GDPDeflator ~ Governmentbonds + ConsumerPrices + TotalReservesMinusGold, data2)
 
-summary(modelo2)
